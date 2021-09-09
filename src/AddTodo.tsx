@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {View, StyleSheet, TextInput, Button} from "react-native";
+import {View, StyleSheet, TextInput, Button, Alert} from "react-native";
 
 interface IProps {
     onSubmit: Function
@@ -14,17 +14,19 @@ export const AddTodo: React.FC<IProps> = ({onSubmit}) => {
             onSubmit(value)
             setValue('')
         } else {
-            //error
+            Alert.alert('Название задачи не может быть пустым!')
         }
     }
 
     return (
         <View style={styles.block}>
             <TextInput
+                autoCorrect={false}
                 onChangeText={setValue}
                 value={value}
                 placeholder={'Введите задачу'}
                 style={styles.input}
+                autoCapitalize={'none'}
             />
             <Button onPress={pressHandler} title={"Добавить"}/>
         </View>

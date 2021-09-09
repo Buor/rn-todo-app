@@ -1,16 +1,19 @@
 import React from 'react'
-import {Text, View, StyleSheet} from "react-native"
+import {Text, View, StyleSheet, TouchableOpacity} from "react-native"
 import {ITodo} from "./types/todoTypes";
 
 interface IProps {
-    todo: ITodo
+    todo: ITodo,
+    onRemove: Function
 }
 
-export const Todo: React.FC<IProps> = ({todo}) => {
+export const Todo: React.FC<IProps> = ({todo, onRemove}) => {
     return (
-        <View style={styles.todo}>
-            <Text>{todo.title}</Text>
-        </View>
+        <TouchableOpacity onLongPress={() => onRemove(todo.id)}>
+            <View style={styles.todo}>
+                <Text>{todo.title}</Text>
+            </View>
+        </TouchableOpacity>
     )
 }
 

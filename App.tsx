@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {Navbar} from "./src/Navbar";
 import {AddTodo} from "./src/AddTodo";
 import {ITodo} from "./src/types/todoTypes";
@@ -14,8 +14,11 @@ const App: React.FC = () => {
             id: Date.now().toString(),
             title
         }
-
         setTodos(prev => [...prev, newTodo])
+    }
+
+    const removeTodo = (id: string) => {
+        setTodos(prev => prev.filter(todo => todo.id !== id))
     }
 
     return (
@@ -23,10 +26,8 @@ const App: React.FC = () => {
             <Navbar title={"Todo"}/>
             <View style={styles.container}>
                 <AddTodo onSubmit={addTodo}/>
-
-                <View>
-                    {todos.map(todo => <Todo todo={todo} key={todo.id}/>)}
-                </View>
+                <FlatList style={styles.todosList} data={todos}
+                          renderItem={({item}) => <Todo todo={item} onRemove={removeTodo}/>}/>
             </View>
         </View>
     );
@@ -37,6 +38,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         paddingVertical: 20
     },
+    todosList: {
+        marginBottom: 60
+    }
 });
 
 export default App;
