@@ -1,16 +1,32 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {View, StyleSheet, TextInput, Button} from "react-native";
 
 interface IProps {
-
+    onSubmit: Function
 }
 
-export const AddTodo: React.FC<IProps> = () => {
+export const AddTodo: React.FC<IProps> = ({onSubmit}) => {
+
+    const [value, setValue] = useState('');
+
+    const pressHandler = () => {
+        if (value.trim()) {
+            onSubmit(value)
+            setValue('')
+        } else {
+            //error
+        }
+    }
+
     return (
         <View style={styles.block}>
-            <TextInput style={styles.input}/>
-            <Button onPress={() => {
-            }} title={"Добавить"}/>
+            <TextInput
+                onChangeText={setValue}
+                value={value}
+                placeholder={'Введите задачу'}
+                style={styles.input}
+            />
+            <Button onPress={pressHandler} title={"Добавить"}/>
         </View>
     )
 }
@@ -19,7 +35,8 @@ const styles = StyleSheet.create({
     block: {
         flexDirection: "row",
         justifyContent: 'space-between',
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: 15
     },
     todoItem: {},
     input: {
