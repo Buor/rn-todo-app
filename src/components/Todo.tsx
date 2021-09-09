@@ -1,6 +1,6 @@
 import React from 'react'
 import {Text, View, StyleSheet, TouchableOpacity} from "react-native"
-import {ITodo} from "./types/todoTypes";
+import {ITodo} from "../types/todoTypes";
 
 interface IProps {
     todo: ITodo,
