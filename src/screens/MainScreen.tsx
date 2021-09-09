@@ -7,15 +7,16 @@ import {ITodo} from "../types/todoTypes";
 interface IProps {
     addTodo: Function
     removeTodo: Function
+    openTodo: Function
     todos: ITodo[]
 }
 
-export const MainScreen: React.FC<IProps> = ({addTodo, removeTodo, todos}) => {
+export const MainScreen: React.FC<IProps> = ({addTodo, removeTodo, todos, openTodo}) => {
     return(
         <>
             <AddTodo onSubmit={addTodo}/>
             <FlatList style={styles.todosList} data={todos}
-                      renderItem={({item}) => <Todo todo={item} onRemove={removeTodo}/>}/>
+                      renderItem={({item}) => <Todo onOpen={openTodo} todo={item} onRemove={removeTodo}/>}/>
         </>
     )
 }

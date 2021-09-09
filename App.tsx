@@ -7,7 +7,7 @@ import {TodoScreen} from "./src/screens/TodoScreen";
 
 const App: React.FC = () => {
 
-    const [todoId, setTodoId] = useState<string | null>(null)
+    const [todoId, setTodoId] = useState<string | null>('2')
     const [todos, setTodos] = useState<ITodo[]>([])
 
     const addTodo = (title: string) => {
@@ -23,11 +23,18 @@ const App: React.FC = () => {
     }
 
     let content = (
-        <MainScreen addTodo={addTodo} removeTodo={removeTodo} todos={todos}/>
+        <MainScreen
+            addTodo={addTodo}
+            removeTodo={removeTodo}
+            todos={todos}
+            openTodo={setTodoId}
+        />
     )
 
-    if(todoId !== null)
-        content = <TodoScreen/>
+    if(todoId !== null) {
+        const selectedTodo = todos.find(todo => todo.id === todoId)
+        content = <TodoScreen todo={selectedTodo!} goBack={() => setTodoId(null)}/>
+    }
 
     return (
         <View>

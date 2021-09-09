@@ -4,12 +4,16 @@ import {ITodo} from "../types/todoTypes";
 
 interface IProps {
     todo: ITodo,
-    onRemove: Function
+    onRemove: Function,
+    onOpen: Function
 }
 
-export const Todo: React.FC<IProps> = ({todo, onRemove}) => {
+export const Todo: React.FC<IProps> = ({todo, onRemove, onOpen}) => {
     return (
-        <TouchableOpacity onLongPress={() => onRemove(todo.id)}>
+        <TouchableOpacity
+            onLongPress={() => onRemove(todo.id)}
+            onPress={() => onOpen(todo.id)}
+        >
             <View style={styles.todo}>
                 <Text>{todo.title}</Text>
             </View>
