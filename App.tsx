@@ -7,7 +7,7 @@ import {TodoScreen} from "./src/screens/TodoScreen";
 
 const App: React.FC = () => {
 
-    const [todoId, setTodoId] = useState<string | null>('2')
+    const [todoId, setTodoId] = useState<string | null>(null)
     const [todos, setTodos] = useState<ITodo[]>([])
 
     const addTodo = (title: string) => {
