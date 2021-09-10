@@ -1,6 +1,7 @@
 import React from 'react'
-import {Text, View, StyleSheet, TouchableOpacity} from "react-native"
-import {ITodo} from "../types/todoTypes";
+import {StyleSheet, TouchableOpacity, View} from "react-native"
+import {ITodo} from "../types/todoTypes"
+import {AppText} from "./ui/AppText"
 
 interface IProps {
     todo: ITodo,
@@ -15,7 +16,7 @@ export const Todo: React.FC<IProps> = ({todo, onRemove, onOpen}) => {
             onPress={() => onOpen(todo.id)}
         >
             <View style={styles.todo}>
-                <Text>{todo.title}</Text>
+                <AppText style={styles.title}>{todo.title}</AppText>
             </View>
         </TouchableOpacity>
     )
@@ -30,5 +31,8 @@ const styles = StyleSheet.create({
         borderColor: '#eee',
         borderRadius: 5,
         marginBottom: 10
+    },
+    title: {
+        fontFamily: 'roboto-bold'
     }
 })

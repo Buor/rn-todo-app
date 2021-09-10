@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Modal, Button, TextInput, Alert} from 'react-native'
-import {THEME} from "../theme";
+import React, {useState} from 'react'
+import {Alert, Button, Modal, StyleSheet, TextInput, View} from 'react-native'
+import {THEME} from "../theme"
 
 interface IProps {
     onCancel: Function

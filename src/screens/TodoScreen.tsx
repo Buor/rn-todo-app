@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import {Text, View, Button, StyleSheet} from "react-native";
-import {ITodo} from "../types/todoTypes";
-import {THEME} from "../theme";
-import {AppCard} from "../components/ui/Card";
-import {EditModal} from "../components/EditModal";
+import {Button, StyleSheet, View} from "react-native"
+import {ITodo} from "../types/todoTypes"
+import {THEME} from "../theme"
+import {AppCard} from "../components/ui/Card"
+import {EditModal} from "../components/EditModal"
+import {AppTextBold} from "../components/ui/AppTextBold"
 
 interface IProps {
     goBack: Function,
@@ -24,7 +25,7 @@ export const TodoScreen: React.FC<IProps> = ({goBack, onRemove, onSave, todo}) =
         <View>
             <EditModal onSave={saveHandler} value={todo.title} visible={modal} onCancel={() => setModal(false)}/>
             <AppCard style={styles.card}>
-                <Text style={styles.title}>{todo.title}</Text>
+                <AppTextBold style={styles.title}>{todo.title}</AppTextBold>
                 <Button title={'Ред.'} onPress={() => setModal(true)}/>
             </AppCard>
 

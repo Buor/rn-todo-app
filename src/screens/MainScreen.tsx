@@ -1,8 +1,9 @@
 import React from 'react'
-import {FlatList, Image, StyleSheet, Text, View} from "react-native";
-import {AddTodo} from "../components/AddTodo";
-import {Todo} from "../components/Todo";
-import {ITodo} from "../types/todoTypes";
+import {FlatList, Image, StyleSheet, View} from "react-native"
+import {AddTodo} from "../components/AddTodo"
+import {Todo} from "../components/Todo"
+import {ITodo} from "../types/todoTypes"
+import {AppText} from "../components/ui/AppText"
 
 interface IProps {
     addTodo: Function
@@ -25,7 +26,7 @@ export const MainScreen: React.FC<IProps> = ({addTodo, removeTodo, todos, openTo
     if(!todos.length) {
         content = <View style={styles.imageWrap}>
             <Image style={styles.image} source={require('../../assets/icons/noImage.png')}/>
-            <Text style={styles.text}>Задачи отсутствуют!</Text>
+            <AppText style={styles.text}>Задачи отсутствуют!</AppText>
         </View>
     }
 

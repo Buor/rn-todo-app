@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
-import {View, StyleSheet, TextInput, Button, Alert} from "react-native";
-import {THEME} from "../theme";
+import {Alert, StyleSheet, TextInput, View} from "react-native"
+import {THEME} from "../theme"
+import {AntDesign} from '@expo/vector-icons'
 
 interface IProps {
     onSubmit: Function
@@ -29,7 +30,9 @@ export const AddTodo: React.FC<IProps> = ({onSubmit}) => {
                 style={styles.input}
                 autoCapitalize={'none'}
             />
-            <Button onPress={pressHandler} title={"Добавить"}/>
+            <AntDesign.Button onPress={pressHandler} name="pluscircleo" size={24} color="black">
+                Добавить
+            </AntDesign.Button>
         </View>
     )
 }
