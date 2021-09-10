@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import {ITodo} from "./src/types/todoTypes";
 import {MainScreen} from "./src/screens/MainScreen";
 import {Navbar} from "./src/components/Navbar";
@@ -19,7 +19,25 @@ const App: React.FC = () => {
     }
 
     const removeTodo = (id: string) => {
-        setTodos(prev => prev.filter(todo => todo.id !== id))
+        const todoToDelete = todos.find(todo => todo.id === id)
+        Alert.alert(
+            'Удаление элемента',
+            `Вы уверены, что хотите удалить "${todoToDelete!.title}"?`,
+            [
+                {
+                    text: 'Отмена',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Удалить',
+                    onPress: () => {
+                        setTodoId(null)
+                        setTodos(prev => prev.filter(todo => todo.id !== id))
+                    }
+                }
+            ],
+            {cancelable: false}
+        )
     }
 
     let content = (
@@ -31,16 +49,16 @@ const App: React.FC = () => {
         />
     )
 
-    if(todoId !== null) {
+    if (todoId !== null) {
         const selectedTodo = todos.find(todo => todo.id === todoId)
-        content = <TodoScreen todo={selectedTodo!} goBack={() => setTodoId(null)}/>
+        content = <TodoScreen onRemove={removeTodo} todo={selectedTodo!} goBack={() => setTodoId(null)}/>
     }
 
     return (
         <View>
             <Navbar title={"Todo"}/>
             <View style={styles.container}>
-                { content }
+                {content}
             </View>
         </View>
     );

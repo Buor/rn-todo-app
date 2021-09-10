@@ -6,10 +6,11 @@ import {AppCard} from "../components/ui/Card";
 
 interface IProps {
     goBack: Function,
+    onRemove: Function,
     todo: ITodo
 }
 
-export const TodoScreen: React.FC<IProps> = ({goBack, todo}) => {
+export const TodoScreen: React.FC<IProps> = ({goBack, onRemove, todo}) => {
     return (
         <View>
             <AppCard style={styles.card}>
@@ -22,7 +23,7 @@ export const TodoScreen: React.FC<IProps> = ({goBack, todo}) => {
                     <Button title={"Назад"} color={THEME.GRAY_COLOR} onPress={() => goBack()}/>
                 </View>
                 <View style={styles.button}>
-                    <Button title={"Удалить"} color={THEME.DANGER_COLOR} onPress={() => console.log('To remove')}/>
+                    <Button title={"Удалить"} color={THEME.DANGER_COLOR} onPress={() => onRemove(todo.id)}/>
                 </View>
 
             </View>
