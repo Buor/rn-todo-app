@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Text, View, Button, StyleSheet} from "react-native";
 import {ITodo} from "../types/todoTypes";
 import {THEME} from "../theme";
 import {AppCard} from "../components/ui/Card";
+import {EditModal} from "../components/EditModal";
 
 interface IProps {
     goBack: Function,
@@ -11,11 +12,14 @@ interface IProps {
 }
 
 export const TodoScreen: React.FC<IProps> = ({goBack, onRemove, todo}) => {
+    const [modal, setModal] = useState(false)
+
     return (
         <View>
+            <EditModal visible={modal} onCancel={() => setModal(false)}/>
             <AppCard style={styles.card}>
                 <Text style={styles.title}>{todo.title}</Text>
-                <Button title={'Ред.'} onPress={() => {}}/>
+                <Button title={'Ред.'} onPress={() => setModal(true)}/>
             </AppCard>
 
             <View style={styles.buttons}>
