@@ -40,6 +40,15 @@ const App: React.FC = () => {
         )
     }
 
+    const updateTodo = (id: string, title: string) => {
+        setTodos(prev => prev.map(todo => {
+            if(todo.id === id) {
+                todo.title = title
+            }
+            return todo
+        }))
+    }
+
     let content = (
         <MainScreen
             addTodo={addTodo}
@@ -51,7 +60,7 @@ const App: React.FC = () => {
 
     if (todoId !== null) {
         const selectedTodo = todos.find(todo => todo.id === todoId)
-        content = <TodoScreen onRemove={removeTodo} todo={selectedTodo!} goBack={() => setTodoId(null)}/>
+        content = <TodoScreen onSave={updateTodo} onRemove={removeTodo} todo={selectedTodo!} goBack={() => setTodoId(null)}/>
     }
 
     return (

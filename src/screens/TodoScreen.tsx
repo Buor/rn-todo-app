@@ -8,15 +8,21 @@ import {EditModal} from "../components/EditModal";
 interface IProps {
     goBack: Function,
     onRemove: Function,
-    todo: ITodo
+    todo: ITodo,
+    onSave: Function
 }
 
-export const TodoScreen: React.FC<IProps> = ({goBack, onRemove, todo}) => {
+export const TodoScreen: React.FC<IProps> = ({goBack, onRemove, onSave, todo}) => {
     const [modal, setModal] = useState(false)
+
+    const saveHandler = (title: string) => {
+        onSave(todo.id, title)
+        setModal(false)
+    }
 
     return (
         <View>
-            <EditModal visible={modal} onCancel={() => setModal(false)}/>
+            <EditModal onSave={saveHandler} value={todo.title} visible={modal} onCancel={() => setModal(false)}/>
             <AppCard style={styles.card}>
                 <Text style={styles.title}>{todo.title}</Text>
                 <Button title={'Ред.'} onPress={() => setModal(true)}/>

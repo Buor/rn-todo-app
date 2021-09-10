@@ -1,26 +1,41 @@
-import React from 'react';
-import {View, StyleSheet, Modal, Button, TextInput} from 'react-native'
+import React, {useState} from 'react';
+import {View, StyleSheet, Modal, Button, TextInput, Alert} from 'react-native'
 import {THEME} from "../theme";
 
 interface IProps {
     onCancel: Function
-    visible: boolean
+    visible: boolean,
+    value: string,
+    onSave: Function
 }
 
-export const EditModal: React.FC<IProps> = ({visible, onCancel}) => {
+export const EditModal: React.FC<IProps> = ({value, visible, onCancel, onSave}) => {
+
+    const [title, setTitle] = useState(value)
+
+    const saveHandler = () => {
+        if(title.trim().length < 3) {
+            Alert.alert('Ошибка!', `Минимальная длинна названия 3 символа! Сейчас ${title.trim().length} символов.`)
+        } else {
+            onSave(title)
+        }
+    }
+
     return (
         <Modal visible={visible} animationType={'slide'} transparent={false}>
             <View style={styles.wrap}>
-                <TextInput style={styles.input}
-                           placeholder={'Введите название'}
-                           autoCapitalize={'none'}
-                           autoCorrect={false}
-                           maxLength={64}
+                <TextInput
+                    value={title}
+                    onChangeText={setTitle}
+                    style={styles.input}
+                    placeholder={'Введите название'}
+                    autoCapitalize={'none'}
+                    autoCorrect={false}
+                    maxLength={64}
                 />
                 <View style={styles.buttons}>
                     <Button onPress={() => onCancel()} title={'Отменить'} color={THEME.DANGER_COLOR}/>
-                    <Button onPress={() => {
-                    }} title={'Сохранить'}/>
+                    <Button onPress={() => saveHandler()} title={'Сохранить'}/>
                 </View>
             </View>
         </Modal>
